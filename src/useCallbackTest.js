@@ -1,14 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
 import React, {useState, useCallback, useMemo, useEffect} from 'react';
 import useRenderCounter from './useRenderCounter';
-import UseCall from './useCallbackTest';
 import axios from 'axios'
 
-function App() {
+const UseCall = () => {
 
   const [data, setData] = useState('')
   let count = useRenderCounter('h1')
+
+  const memoizedCallback = useCallback(
+    () => {
+      ;
+    },
+    [],
+  );
   
 
   const getNewData = () => {
@@ -39,6 +43,8 @@ function App() {
       <UseCall />
     </div>
   );
+
 }
 
-export default App;
+
+export default UseCall

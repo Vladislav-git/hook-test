@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
-import React, {useState, useCallback, useMemo, useEffect} from 'react';
+import React, {useState} from 'react';
 import useRenderCounter from './useRenderCounter';
 import UseCall from './useCallbackTest';
+import UseMem from './useMemoTest';
 import axios from 'axios'
 
 function App() {
@@ -14,16 +14,10 @@ function App() {
   const getNewData = () => {
     axios({
       method: 'get',
-      url: 'http://api.openweathermap.org/data/2.5/forecast/daily?q=Minsk&appid=87cbeb5a6565932d7931e837401e2def'
+      url: 'http://api.openweathermap.org/data/2.5/weather?q=Minsk&appid=87cbeb5a6565932d7931e837401e2def'
     })
       .then(info => setData(info.data))
   }
-
-  
-
-  useEffect(() => {
-    getNewData()
-  }, [])
 
 
   return (
@@ -32,6 +26,7 @@ function App() {
       <h2>{count}</h2>
       <button onClick={() => getNewData()}>Update data</button>
       <UseCall />
+      <UseMem />
     </div>
   );
 }

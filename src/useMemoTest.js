@@ -1,8 +1,8 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useMemo} from 'react';
 import useRenderCounter from './useRenderCounter';
 import axios from 'axios'
 
-const UseCall = () => {
+const UseMem = () => {
 
   const [info, setInfo] = useState([])
   let count = useRenderCounter('h3')
@@ -17,24 +17,24 @@ const UseCall = () => {
     setInfo(data.data)
   }
 
-  const testCall = useCallback(() =>
+  const memoizedValue = useMemo(() => 
     getNewData(),
     []
-  )
+  );
 
-  const click = () => {
-    testCall()
+  const click = async() => {
+    await getNewData()
   }
 
   return (
     <div>
-      <h3>With useCallback: {info.name}</h3>
+      <h3>With useMem: {info.name}</h3>
       <h2>{count}</h2>
-      <button onClick={() => click()}>Update data</button>
+      <button onClick={async() => await click()}>Update data</button>
     </div>
   );
 
 }
 
 
-export default UseCall
+export default UseMem
